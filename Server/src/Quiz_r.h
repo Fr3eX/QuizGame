@@ -1,5 +1,5 @@
-#ifndef QUIZ_H
-#define QUIZ_H
+#ifndef QUIZ_R_H
+#define QUIZ_R_H
 
 #define ANSWER_BUFFER 255
 
@@ -16,6 +16,13 @@ typedef struct Quiz_r
 }Quiz_r;
 
 
+Quiz_r* __InitAnswer(unsigned int,unsigned char,char*);
+
+
+void __AddAnswer(Quiz_r**,unsigned int,unsigned char,char *);
+void __FreeQuiz_r(Quiz_r**);
+
+void __PrintQuiz_r(Quiz_r*);
 
 #endif
 

@@ -7,9 +7,7 @@
 #include "Quiz_r.h"
 
 
-
-
-Quiz_r* InitResponse(unsigned int quiz_qId,unsigned char isCorrect,char *answer)
+Quiz_r* __InitAnswer(unsigned int quiz_qId,unsigned char isCorrect,char *answer)
 {
 	Quiz_r* new_r=malloc(sizeof(*new_r));
 	
@@ -27,11 +25,72 @@ Quiz_r* InitResponse(unsigned int quiz_qId,unsigned char isCorrect,char *answer)
 	if(!new_r->answer)
 	{
 		print_log("[MEMORY] Not Enough Memory for Quiz_r");
+		__FreeQuiz_r(&new_r);
 		return NULL;
 	}
-	
+	strcpy(new_r->answer,answer);
 	new_r->next=NULL;
 	
 	return new_r;
 }
+
+void __AddAnswer(Quiz_r** answers,unsigned int quiz_qId,unsigned char isCorrect,char *answer)
+{
+	if(!*answers)
+	{
+		*answers=__InitAnswer(quiz_qId,isCorrect,answer);
+		return;
+	}
+
+	Quiz_r* new_r=malloc(sizeof(*new_r));
+	if(!new_r)
+	{
+		print_log("[MEMORY] Not Enough Memory for Quiz_r");
+		return; 
+	}
+	
+	new_r->quiz_qId=quiz_qId;
+	new_r->isCorrect=isCorrect;
+	new_r->answer=malloc(ANSWER_BUFFER* sizeof(char));
+	
+	if(!new_r->answer)
+	{
+		print_log("[MEMORY] Not Enough Memory for Quiz_r");
+		__FreeQuiz_r(&new_r);
+		return;
+	}
+	strcpy(new_r->answer,answer);
+	
+	new_r->next=*answers;
+	*answers=new_r;
+}
+
+
+
+
+void __FreeQuiz_r(Quiz_r** answer)
+{
+	if(!*answer)
+		return;
+	__FreeQuiz_r(&(*answer)->next);
+	free((*answer)->answer);
+	free(*answer);
+	*answer=NULL;
+}
+
+void __PrintQuiz_r(Quiz_r *r)
+{
+	
+	unsigned i=0;
+	while(r)
+	{
+	printf("%p\n",r);
+		printf("Resp[%d] : %s\n",++i,r->answer);
+		r=r->next;
+	}
+
+}
+
+
+
 
