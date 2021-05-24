@@ -16,10 +16,10 @@ typedef struct Quiz_r
 }Quiz_r;
 
 
-Quiz_r* __InitAnswer(unsigned int,unsigned char,char*);
+Quiz_r* __InitAnswer(unsigned id,unsigned int,unsigned char,char*);
 
 
-void __AddAnswer(Quiz_r**,unsigned int,unsigned char,char *);
+void __AddAnswer(Quiz_r**,unsigned int,unsigned int,unsigned char,char *);
 void __FreeQuiz_r(Quiz_r**);
 
 void __PrintQuiz_r(Quiz_r*);

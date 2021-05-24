@@ -16,9 +16,9 @@ typedef struct Quiz_q
 
 
 
-Quiz_q*  __InitQuestion(unsigned int,unsigned int,char*,Quiz_r*);
+Quiz_q*  __InitQuestion(unsigned int,unsigned int,unsigned int,char*,Quiz_r*);
 
-void __AddQuestion(Quiz_q**,unsigned int,unsigned int,char*,Quiz_r*);
+Quiz_q* __AddQuestion(Quiz_q**,unsigned int,unsigned int,unsigned int,char*,Quiz_r*);
 void __PrintQuiz_q(Quiz_q*);
 void __FreeQuiz_q(Quiz_q**);
 #endif

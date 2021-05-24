@@ -4,8 +4,8 @@
 
 
 CC=gcc
-CFLAGS=
-LDFLAGS=
+CFLAGS=`mysql_config --cflags`
+LDFLAGS=`mysql_config --libs`
 DEBUG=
 
 RM=rm
@@ -34,10 +34,10 @@ release: $(BIN)
 
 
 test: $(TEMP) $(TEST_BINS)
-	for test in $(TEST_BINS);do ./$$test --verbose ;done
+	for test in $(TEST_BINS);do ./$$test --verbose -j1  ;done
 
 $(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 $(OBJ)/%.o:$(SRC)/%.c $(SRC)/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -46,7 +46,7 @@ $(OBJ)/%.o:$(SRC)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TEST_BINDIR)/%:$(TEST)/$(SRC)/%.c
-	$(CC) $(CFLAGS) $< $(TEMP) -o $@ -lcriterion	
+	$(CC) $(CFLAGS) $< $(TEMP) -o $@ $(LDFLAGS) -lcriterion	
 
 clean_test:
 	$(RM) $(TEST_BINS)

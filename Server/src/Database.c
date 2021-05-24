@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stddef.h>
 
-#include <mysql.h>
+#include <mysql/mysql.h>
 
 #include "Database.h"
 #include "Utility.h"

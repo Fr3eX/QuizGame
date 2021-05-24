@@ -5,6 +5,7 @@
 
 #define QUESTION_BUFFER 255
 #define ANSWER_BUFFER 255
+#include <time.h>
 
 
 typedef struct Quiz_q Quiz_q;
@@ -23,26 +24,6 @@ typedef struct
 	struct tm deadTime;
 }Quiz;
 
-typedef struct
-{
-	unsigned int quizId;
-	unsigned int q_id;
-	unsigned int mark;
-	char* question;
-	Quiz_r* responses,
-	
-	Quiz_q* next;
-}Quiz_q;
-
-typedef struct
-{
-	unsigned int r_id;
-	unsigned int quiz_qId;
-	unsigned char isCorrect;
-	char* answer;
-
-	Quiz_r* next;
-}Quiz_r;
 
 typedef struct
 {

@@ -24,8 +24,8 @@ static char* SQL_SELECTID="SELECT ID from Quiz where quizCode='%s'";
 
 
 
-
+/*
 unsigned int __AddQuiz(unsigned int quizOwner,Quiz_q* questions,Quiz_r* response)
 {
 	
-}
+}*/
