@@ -1,7 +1,7 @@
 #ifndef DAOQUIZ_R_H
 #define DAOQUIZ_R_H
 
-#define BUFFER_LENGTH 555
+#define RBUFFER_LENGTH 555
 
 typedef enum
 {

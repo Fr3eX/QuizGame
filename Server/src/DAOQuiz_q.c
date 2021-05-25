@@ -30,7 +30,7 @@ bool __PersistQuiz_q(MYSQL* con,Quiz_q *r)
 		print_logerr("[DAOQUIZ_R:PERSISTE] Connection has not been initialized");
 		return false;	
 	}
-	char buffer[BUFFER_LENGTH];
+	char buffer[QBUFFER_LENGTH];
 	Bzero(buffer,sizeof buffer);
 
 	while(r)
@@ -57,7 +57,7 @@ bool __DeleteQuiz_q(MYSQL* con,unsigned int id)
 		return false;	
 	}	
 	
-	char buffer[BUFFER_LENGTH];
+	char buffer[QBUFFER_LENGTH];
 	Bzero(buffer,sizeof buffer);
 	
 	sprintf(buffer,SQL_DELETE,id);
@@ -80,7 +80,7 @@ bool __UpdateQuiz_q(MYSQL* con,Quiz_q* question,Field_qq field,Field_qqVal *val)
 		return false;	
 	}	
 	
-	char buffer[BUFFER_LENGTH];
+	char buffer[QBUFFER_LENGTH];
 	Bzero(buffer,sizeof buffer);
 	
 	
@@ -132,7 +132,7 @@ Quiz_q * __GetQuiz_q(MYSQL* con,Quiz* quiz)
 		return NULL;	
 	}	
 
-	char buffer[BUFFER_LENGTH];
+	char buffer[QBUFFER_LENGTH];
 	Quiz_q* questions=NULL;	
 	Quiz_q* tmp=NULL;
 	MYSQL_RES* results=NULL;		

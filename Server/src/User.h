@@ -22,6 +22,7 @@ typedef struct Client
 	unsigned int numberOfQuizzesPassed;
 	unsigned int numberOfQuizzesPassed_S;
 	unsigned int numberOfQuizzesPassed_F;
+
 }Client;
 
 typedef enum

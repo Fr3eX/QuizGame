@@ -2,7 +2,7 @@
 #define DAOQUIZ_Q_H
 
 
-#define BUFFER_LENGTH 555
+#define QBUFFER_LENGTH 555
 
 
 typedef enum

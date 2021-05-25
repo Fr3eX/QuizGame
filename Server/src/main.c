@@ -15,6 +15,7 @@
 #include "Quiz_q.h"
 #include "DAOQuiz_r.h"
 #include "DAOQuiz_q.h"
+#include "DAOQuiz.h"
 
 int main()
 {
@@ -22,15 +23,18 @@ int main()
 	__InitDatabaseConnection();		
 	
 	MYSQL *con=__GetMysqlCon();
-	Quiz quiz;
-	quiz.quizId=1;	
-
-	Quiz_q* questions=__GetQuiz_q(con,&quiz);
 	
-	if(questions == NULL)
-		printf("NULL\n");	
-	__PrintQuiz_q(questions);
+	Quiz* q=__GetQuiz(con,500);	
+	__PrintQuiz(q);
 
+	__UpdateQuiz(con,QNBR_QP,20,q);	
+	__UpdateQuiz(con,QNBR_QPS,20,q);	
+	__UpdateQuiz(con,QNBR_QPF,20,q);	
+	
+	
+	__PrintQuiz(q);
+	
+	
 	__FreeDatabaseConnection();
 	__FreePData();
 	return 0;
