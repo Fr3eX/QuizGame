@@ -16,6 +16,7 @@
 #include "DAOQuiz_r.h"
 #include "DAOQuiz_q.h"
 #include "DAOQuiz.h"
+#include "Q_U_STATUS.h"
 
 int main()
 {
@@ -24,16 +25,13 @@ int main()
 	
 	MYSQL *con=__GetMysqlCon();
 	
-	Quiz* q=__GetQuiz(con,500);	
-	__PrintQuiz(q);
-
-	__UpdateQuiz(con,QNBR_QP,20,q);	
-	__UpdateQuiz(con,QNBR_QPS,20,q);	
-	__UpdateQuiz(con,QNBR_QPF,20,q);	
-	
-	
-	__PrintQuiz(q);
-	
+	Q_U_status* alja=__GetQUStatus(con,3);
+	__PrintQUStatus(alja);	
+	Q_U_status* omar=__GetQUStatus(con,2);
+	__PrintQUStatus(omar);	
+	Q_U_status* inc=__GetQUStatus(con,1);
+	__PrintQUStatus(inc);	
+		
 	
 	__FreeDatabaseConnection();
 	__FreePData();

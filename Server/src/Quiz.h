@@ -21,14 +21,6 @@ typedef struct Quiz
 }Quiz;
 
 
-typedef struct
-{
-	unsigned int userId;
-	unsigned int quizId;
-	unsigned int mark;
-	unsigned int n_correctAnswers;
-	unsigned int n_wrongAnswers;
-}Q_U_status;
 
 
 Quiz* __InitQuiz(unsigned int,
