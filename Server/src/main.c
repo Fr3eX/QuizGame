@@ -17,23 +17,14 @@
 #include "DAOQuiz_q.h"
 #include "DAOQuiz.h"
 #include "Q_U_STATUS.h"
+#include "Server.h"
 
 int main()
 {
 	__ParseCfgFile("config");
-	__InitDatabaseConnection();		
 	
-	MYSQL *con=__GetMysqlCon();
+	__InitServer();	
 	
-	Q_U_status* alja=__GetQUStatus(con,3);
-	__PrintQUStatus(alja);	
-	Q_U_status* omar=__GetQUStatus(con,2);
-	__PrintQUStatus(omar);	
-	Q_U_status* inc=__GetQUStatus(con,1);
-	__PrintQUStatus(inc);	
-		
-	
-	__FreeDatabaseConnection();
 	__FreePData();
 	return 0;
 
