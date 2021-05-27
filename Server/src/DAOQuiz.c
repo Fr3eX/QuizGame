@@ -29,6 +29,7 @@ static char* SQL_SELECT_OWNER="SELECT id,quizOwner,quizCode,NBR_QP,NBR_QPS,NBR_Q
 
 bool __PersistQuiz(MYSQL* con,Quiz* quiz)
 {
+	Quiz* tmp;
 	if(!con)
 	{	
 		print_logerr("[QUIZ:PERSISTE] Connection has not been initialized");
@@ -44,10 +45,10 @@ bool __PersistQuiz(MYSQL* con,Quiz* quiz)
 				quiz->qs_number,
 				quiz->qf_number);			
 	
-		if((quiz=__GetQuiz(con,quiz->quizCode)))
+		if((tmp=__GetQuiz(con,quiz->quizCode)))
 		{
 			print_log("[ADD_QUIZ] : DUPLICATE QUIZECODE");
-			__FreeQuiz(&quiz);
+			__FreeQuiz(&tmp);
 				return false;
 		}
 	

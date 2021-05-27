@@ -16,7 +16,7 @@ typedef union
 
 }Field_qrVal;
 
-bool __PersistQuiz_r(MYSQL*,Quiz_r*);
+bool __PersistQuiz_r(MYSQL*,Quiz_r*,unsigned int);
 bool __DeleteQuiz_r(MYSQL*,unsigned int);
 bool __UpdateQuiz_r(MYSQL*,Field_qr,Field_qrVal*,Quiz_r*);
 

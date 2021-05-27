@@ -16,7 +16,7 @@ static char* SQL_UPDATE="UPDATE Quiz_r SET %s='%s' where id=%d";
 static char* SQL_UPDATE_I="UPDATE Quiz_r SET %s=%d where id=%d";
 static char* SQL_SELECTQUIZ_ID="SELECT id,quiz_qId,isCorrect,answer from Quiz_r where quiz_qId=%d";
 
-bool __PersistQuiz_r(MYSQL* con,Quiz_r *r)
+bool __PersistQuiz_r(MYSQL* con,Quiz_r *r,unsigned int id)
 {
 	if(!con)
 	{	
@@ -30,7 +30,7 @@ bool __PersistQuiz_r(MYSQL* con,Quiz_r *r)
 	{
 	
 		Bzero(buffer,sizeof buffer);
-		sprintf(buffer,SQL_INSERT,r->quiz_qId,r->isCorrect,r->answer);
+		sprintf(buffer,SQL_INSERT,id,r->isCorrect,r->answer);
 		
 		if(mysql_query(con,buffer))
 		{
@@ -41,6 +41,7 @@ bool __PersistQuiz_r(MYSQL* con,Quiz_r *r)
 	}
 	return true;
 }
+
 
 bool __DeleteQuiz_r(MYSQL* con,unsigned int id)
 {

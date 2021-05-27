@@ -10,6 +10,7 @@
 #include "DAOQuiz_q.h"
 #include "DAOQuiz_r.h"
 #include "Quiz_q.h"
+#include "Quiz_r.h"
 
 
 
@@ -23,7 +24,7 @@ static char* SQL_SELECTQUIZ_ID="SELECT id,quizId,mark,question from Quiz_q where
 
 
 
-bool __PersistQuiz_q(MYSQL* con,Quiz_q *r)
+bool __PersistQuiz_q(MYSQL* con,Quiz_q *r,unsigned int id)
 {
 	if(!con)
 	{	
@@ -37,15 +38,19 @@ bool __PersistQuiz_q(MYSQL* con,Quiz_q *r)
 	{
 	
 		Bzero(buffer,sizeof buffer);
-		sprintf(buffer,SQL_INSERT,r->quizId,r->mark,r->question);
+		sprintf(buffer,SQL_INSERT,id,r->mark,r->question);
 		
 		if(mysql_query(con,buffer))
 		{
 			__PrintDError("{ADD_Q} Erro while executing insert statement");
 			return false;
 		}
+		
+		unsigned id=mysql_insert_id(con);	
+		__PersistQuiz_r(con,r->answers,id);	
 		r=r->next;
 	}
+	return true;
 }
 
 

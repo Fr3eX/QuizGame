@@ -32,7 +32,8 @@ Quiz* __InitQuiz(unsigned int id,
 
 	quiz->questions=NULL;
 	quiz->next=NULL;
-	
+
+
 	return quiz;
 }
 
