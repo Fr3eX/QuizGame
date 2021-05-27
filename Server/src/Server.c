@@ -57,7 +57,7 @@ int main(int argv,char* argc[])
 
 	int srv_socket;
 	int cln_socket;
-	unsigned r_byte;
+	unsigned  r_byte;
 	
 	struct hostent *hp;
 	
@@ -172,6 +172,7 @@ int main(int argv,char* argc[])
 				else
 				{
 					r_byte=(int)recv(i,packet,sizeof(PACKET),0);
+					
 					if( !r_byte )
 					{
 						if(!__RemoveHolder(i))

@@ -1,9 +1,8 @@
 #ifndef USERVER_H
 #define USERVER_H
 
-#define MSG_SIZE 4000
+#define MSG_SIZE 700
 #define BUFFER_LENGTH 255
-
 
 
 typedef enum

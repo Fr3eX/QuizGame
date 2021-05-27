@@ -80,9 +80,14 @@ unsigned int __InitServer()
 
 	server_address.sin_port=htons(port);
 
-	if(!inet_aton(address,&server_address.sin_addr))
-		bail("[SERVER] Bad Address");	
-
+	if(!strcmp(address,"*"))
+	{
+		server_address.sin_addr.s_addr=htonl(INADDR_ANY);	
+	}
+	else
+	{	if(!inet_aton(address,&server_address.sin_addr))
+			bail("[SERVER] Bad Address");	
+	}
 
 	/*** Creating socket ****/
 

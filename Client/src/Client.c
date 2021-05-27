@@ -121,10 +121,10 @@ int main(int argv,char* argc[])
 		
 		do
 		{
-			fprintf(stdout,"1-Login\n2-Register\nchoix->: ");
+			fprintf(stdout,"1-Login\n2-Register\n3-Exist\nchoix->: ");
 			scanf("%d",&choix);	
 			freeBuffer();
-		}while(choix !=1 && choix!=2);
+		}while(choix !=1 && choix!=2 && choix!=3);
 
 		if(choix == 1)
 		{	
@@ -168,6 +168,15 @@ RETRY:
 					system("clear");
 					goto RETRY;		
 			}		
+		}
+		else if (choix == 3)
+		{
+			fprintf(stdout,"Have a nice day\n\n");
+			close(cln_socket);
+			free(packet_s);
+			free(packet_r);
+			return EXIT_SUCCESS;
+
 		}
 		else
 		{
@@ -222,7 +231,7 @@ HERE:
 				fprintf(stdout,"\n\n1-Add Quiz\n2-Join Quiz\n3-Logout\nChoix --> : ");
 				scanf("%d",&choix);	
 				freeBuffer();
-			}while(choix !=1 && choix!=2 && choix!=3);
+			}while(choix !=1 && choix!=2 && choix!=3 && choix !=4);
 		
 			if(choix == 1)
 			{
@@ -280,8 +289,8 @@ HERE:
 					tmp->answers=ran;
 				}
 
-				
 				unsigned nombre_question=QstCount(q);	
+				
 				Bzero(packet_s,sizeof(PACKET));	
 				packet_s->type=QUIZ_C;		
 				sprintf(packet_s->message,"%d",nombre_question);
@@ -289,14 +298,13 @@ HERE:
 				SEND_PACKET(cln_socket,packet_s);	
 						
 				Quiz_q* p_q=q;
-				Quiz_r* p_r;	
-			
+				Quiz_r* p_r=NULL;	
+
 				while(p_q)
 				{
 					Bzero(packet_s,sizeof(PACKET));	
 					p_r=p_q->answers;	
 					strcpy(packet_s->message,p_q->question);
-
 					SEND_PACKET(cln_socket,packet_s);
 					while(p_r)
 					{
@@ -313,6 +321,7 @@ HERE:
 					
 					p_q=p_q->next;
 				}
+				
 				
 				int code;	
 				RECEIVE_PACKET(cln_socket,packet_r);	
@@ -403,8 +412,6 @@ HERE:
 								{
 									fprintf(stdout,"%d) - %s\n",++count,questions->answers->answer);	
 									tab[count-1]=questions->answers->isCorrect;
-									printf("%d T/f %d \n",count-1,tab[count-1]);
-
 									questions->answers=questions->answers->next;	
 								}
 								
@@ -442,9 +449,9 @@ HERE:
 							else
 								fprintf(stdout,RED_B"\n\nYour final score is : %d \n"RESET,score);
 							
-							sleep(10);
+							fprintf(stdout,"Print any character to go back..\n\n");	
+							getchar();
 							system("clear");
-							__PrintQuiz_q(questions);
 							__FreeQuiz_q(&questions);
 							break;
 						case QUIZ_404:
@@ -460,6 +467,7 @@ HERE:
 					}	
 				
 				}		
+			
 			}
 			else
 			{
@@ -546,9 +554,6 @@ int read_str(char *buffer, int length)
         return 0;
     }
 }
-
-
-
 
 
 
