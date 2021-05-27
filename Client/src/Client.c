@@ -490,7 +490,7 @@ HERE:
 
 int RECEIVE_PACKET(int sock,PACKET* packet_r)
 {
-	Bzero(packet_r,sizeof(PACKET));
+	/*Bzero(packet_r,sizeof(PACKET));
 	int r_byte=(int)recv(sock,packet_r,sizeof(PACKET),0);	
 	if(!r_byte)
 	{
@@ -501,6 +501,31 @@ int RECEIVE_PACKET(int sock,PACKET* packet_r)
 	else if(r_byte < 0)
 		print_logerr("[CLIENT] Read PACKET error");	
 
+	return r_byte;
+	*/
+	
+	
+	Bzero(packet_r,sizeof(PACKET));	
+	unsigned needed=sizeof(PACKET);
+	unsigned r_byte=0;
+	int tmp;
+		while(r_byte < needed)
+		{
+			tmp=read(sock,packet_r+r_byte,needed-r_byte);		
+			if( tmp < 0 )
+			{
+				print_logerr("Error while ready");
+				break;
+			}
+			else if( tmp == 0)
+				return 0;
+			else
+				r_byte+=tmp;
+	
+		}
+	
+	
+	
 	return r_byte;
 }
 
